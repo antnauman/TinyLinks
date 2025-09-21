@@ -1,2 +1,5 @@
 /LinkService/bin
 /LinkService/obj
+/LinkService.Tests/bin
+/LinkService.Tests/obj
+/LinkService/Migrations
