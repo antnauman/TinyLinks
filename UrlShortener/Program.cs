@@ -1,8 +1,6 @@
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using LinkService.Application;
-using LinkService.Infrastructure;
-using LinkService.Grpc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -23,7 +21,6 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateLinkValidator>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddDbContext<LinkDbContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o =>
 // {
@@ -49,14 +46,6 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
-app.MapGrpcService<LinkResolverService>();
-
 app.MapGet("/healthz", () => Results.Ok("ok"));
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<LinkDbContext>();
-    db.Database.Migrate();
-}
 
 app.Run();

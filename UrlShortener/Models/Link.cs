@@ -1,4 +1,4 @@
-namespace LinkService.Domain;
+namespace LinkService.Models;
 
 public class LinkEntity
 {

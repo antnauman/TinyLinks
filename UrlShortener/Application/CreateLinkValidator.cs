@@ -3,7 +3,7 @@ using LinkService.Contracts;
 
 namespace LinkService.Application;
 
-public class CreateLinkValidator : AbstractValidator<CreateLinkRequestDTO>
+public class CreateLinkValidator : AbstractValidator<LinkRequestDTO>
 {
     public CreateLinkValidator()
     {
